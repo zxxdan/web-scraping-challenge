@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Webscrape Project</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+
+<body>
+<!-- TITLE OF WEBSITE -->
+  <div class="Jumbotron" style="text-align: center;">
+    <h1>Mission to Mars</h1>
+    <a class="btn" style="background-color:#137acf; color: white;" href="/scrape" role="button">Scrape New Data</a>
+  </div>
+
+      <hr>
+
+<!-- CREATING MAIN CONTAINER FOR WEBSITE -->
+  <div class="container my-3">
+
+<!-- LATEST NEWS -->
+    <div class="row px-2">
+      <h3><strong>Latest Mars News</strong></h3>
+      <h4>{{mars_data.News_Title}}</h4>
+      <p>{{mars_data.News_Preview}}</p>
+    </div>
+
+    <!-- ROW -->
+    <div class="row">
+
+      <!-- FEATURED IMAGE -->
+      <div class="col-md-8 col-sm-6 col-xm-12">
+        <h4><strong>Featured Image from the Mars Website</strong></h4>
+        <img src="{{mars_data.Featured_Image_URL}}" style="max-width: 90%; max-height: auto;"
+          alt="Image featured on the JPL site when searching for Mars">
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-xm-12">
+
+        <!-- WEATHER CARD -->
+        <div class="card">
+          <h4><strong>Current Weather on Mars</strong></h4>
+          <p>{{mars_data.Mars_Temperature}}</p>
+        </div>
+
+        <!-- MARS FACTS TABLE -->
+        <div>
+          <h4><strong>Mars Facts</strong></h4>
+          <table>{{mars_data.Mars_Facts | safe}}</table>
+        </div>
+
+      </div>
+
+    </div>
+<hr>
+    <!-- ROW -->
+    <div class="row">
+
+      <!-- 4 CARDS FOR EACH HEMISPHERE -->
+      {% for item in mars_data.Hemisphere_Info %}
+      <div class="col-md-6">
+        <div class="card">
+          <img src="{{item.Image_URL}}" style="max-width: 50%; max-height: auto;" alt="{{ item.Title }}">
+          <div class="container">
+            <h5><b>{{ item.Title }}</b></h5>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>
